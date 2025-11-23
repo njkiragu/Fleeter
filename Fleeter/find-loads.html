@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Loads - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <!-- Link back to the main dashboard -->
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <!-- This is the active page -->
+                    <li class="active"><a href="find-loads.html"><i class="fas fa-truck"></i> <span>Find Loads</span></a></li>
+                    <li><a href="post-load.html"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a></li>
+                    <li><a href="my-posted-loads.html"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <li><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html" id="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Find Loads</h1>
+                    <p>Search for available loads across Kenya.</p>
+                </div>
+            <div class="header-actions">
+                <a href="post-load.html" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Post a Load</a>
+            </div>
+            </header>
+
+            <!-- Search Filters Section -->
+            <section class="search-filters">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="origin" class="filter-label"><i class="fas fa-map-marker-alt"></i> Origin</label>
+                        <input type="text" id="origin" class="filter-input" placeholder="e.g., Nairobi">
+                    </div>
+                    <div class="filter-group">
+                        <label for="destination" class="filter-label"><i class="fas fa-map-pin"></i> Destination</label>
+                        <input type="text" id="destination" class="filter-input" placeholder="e.g., Mombasa">
+                    </div>
+                    <div class="filter-group">
+                        <label for="equipment" class="filter-label"><i class="fas fa-truck-container"></i> Equipment</label>
+                        <select id="equipment" class="filter-select">
+                            <option>All Types</option>
+                            <option>Dry Van</option>
+                            <option>Flatbed</option>
+                            <option>Reefer (Chiller)</option>
+                            <option>Lowbed</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="pickup-date" class="filter-label"><i class="fas fa-calendar-alt"></i> Pickup Date</label>
+                        <input type="date" id="pickup-date" class="filter-input">
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-secondary">Reset</button>
+                    <button class="btn btn-primary"><i class="fas fa-search"></i> Search Loads</button>
+                </div>
+            </section>
+
+            <!-- Load Listings Section -->
+            <section class="load-listings">
+                <div class="results-header">
+                    <h3>Available Loads (147 results)</h3>
+                </div>
+                <div class="listings-container">
+                    <!-- Sample Load Item 1 -->
+                    <div class="load-item">
+                        <div class="load-route">
+                            <div class="location">
+                                <span class="city">Nairobi</span>
+                                <span class="province">Nairobi County</span>
+                            </div>
+                            <i class="fas fa-long-arrow-alt-right route-arrow"></i>
+                            <div class="location">
+                                <span class="city">Mombasa</span>
+                                <span class="province">Mombasa County</span>
+                            </div>
+                        </div>
+                        <div class="load-details">
+                            <span class="load-type"><i class="fas fa-box"></i> Dry Van</span>
+                            <span class="load-specs">40,000 kg, 48ft</span>
+                        </div>
+                        <div class="load-rate">
+                            <span class="price">Ksh 85,000</span>
+                            <span class="rate-per-km">~Ksh 175/km</span>
+                        </div>
+                        <div class="load-broker">
+                            <span class="company-name">Apex Logistics</span>
+                            <span class="post-time">Posted 2h ago</span>
+                        </div>
+                        <div class="load-actions">
+                            <a href="load-detail.html" class="btn btn-primary">View & Bid</a>
+                        </div>
+                    </div>
+
+                    <!-- Sample Load Item 2 -->
+                    <div class="load-item hot-load">
+                        <div class="load-route">
+                            <div class="location">
+                                <span class="city">Kisumu</span>
+                                <span class="province">Kisumu County</span>
+                            </div>
+                            <i class="fas fa-long-arrow-alt-right route-arrow"></i>
+                            <div class="location">
+                                <span class="city">Nakuru</span>
+                                <span class="province">Nakuru County</span>
+                            </div>
+                        </div>
+                        <div class="load-details">
+                            <span class="load-type"><i class="fas fa-temperature-low"></i> Reefer</span>
+                            <span class="load-specs">25,000 kg, 53ft</span>
+                        </div>
+                        <div class="load-rate">
+                            <span class="price">Ksh 60,000</span>
+                            <span class="rate-per-km">~Ksh 240/km</span>
+                        </div>
+                        <div class="load-broker">
+                            <span class="company-name">East Africa Haulers</span>
+                            <span class="post-time"><i class="fas fa-fire"></i> Urgent!</span>
+                        </div>
+                        <div class="load-actions">
+                            <a href="load-detail.html" class="btn btn-primary">View & Bid</a>
+                        </div>
+                    </div>
+
+                    <!-- More load items would be added here dynamically -->
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            localStorage.removeItem('fleeter_rememberUser');
+            localStorage.removeItem('fleeter_userName');
+            // No need to preventDefault, the link will navigate to index.html
+        });
+    </script>
+
+</body>
+</html>

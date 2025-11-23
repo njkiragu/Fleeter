@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Load - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="auto-collapse-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="find-loads.html" class="auto-collapse-link"><i class="fas fa-search"></i> <span>Find Loads</span></a></li>
+                    <!-- This is the active page -->
+                    <li class="active"><a href="post-load.html" class="auto-collapse-link"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a></li>
+                    <li><a href="my-posted-loads.html" class="auto-collapse-link"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html" class="auto-collapse-link"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <li><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html" id="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Post a New Load</h1>
+                    <p>Fill in the details below to add your load to the board.</p>
+                </div>
+            </header>
+
+            <!-- Post a Load Form Section -->
+            <section class="post-load-form">
+                <form>
+                    <!-- Route Details -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-route"></i> Route Details</h3>
+                        <div class="form-grid two-cols">
+                            <div class="input-group">
+                                <label for="origin">Origin</label>
+                                <input type="text" id="origin" placeholder="e.g., Nairobi" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="destination">Destination</label>
+                                <input type="text" id="destination" placeholder="e.g., Mombasa" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Details -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-calendar-alt"></i> Schedule</h3>
+                        <div class="form-grid two-cols">
+                            <div class="input-group">
+                                <label for="pickup-date">Pickup Date</label>
+                                <input type="date" id="pickup-date" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="delivery-date">Delivery Date</label>
+                                <input type="date" id="delivery-date" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Load Specifications -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-box-open"></i> Load Specifications</h3>
+                        <div class="form-grid three-cols">
+                            <div class="input-group">
+                                <label for="equipment">Equipment Type</label>
+                                <select id="equipment" required>
+                                    <option value="" disabled selected>Select equipment...</option>
+                                    <option>Dry Van</option>
+                                    <option>Flatbed</option>
+                                    <option>Reefer (Chiller)</option>
+                                    <option>Lowbed</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="weight">Total Weight (kg)</label>
+                                <input type="number" id="weight" placeholder="e.g., 25000" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="commodity">Commodity</label>
+                                <input type="text" id="commodity" placeholder="e.g., Packaged Goods" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Details -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-dollar-sign"></i> Rate</h3>
+                        <div class="form-grid three-cols">
+                             <div class="input-group">
+                                <label for="offered-rate">Offered Rate (Ksh)</label>
+                                <input type="number" id="offered-rate" placeholder="e.g., 85000" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large"><i class="fas fa-plus-circle"></i> Post Load to Board</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Auto-collapse for specific sidebar links ---
+        document.querySelectorAll('.auto-collapse-link').forEach(link => {
+            link.addEventListener('click', function() {
+                localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+            });
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            localStorage.removeItem('fleeter_rememberUser');
+            localStorage.removeItem('fleeter_userName');
+        });
+    </script>
+
+</body>
+</html>

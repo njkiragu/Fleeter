@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posted Loads - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="find-loads.html"><i class="fas fa-search"></i> <span>Find Loads</span></a></li>
+                    <li><a href="post-load.html"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a></li>
+                    <!-- This is the active page -->
+                    <li class="active"><a href="my-posted-loads.html"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <li><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>My Posted Loads</h1>
+                    <p>Manage your loads and view their status.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="post-load.html" class="btn btn-primary">Post a New Load</a>
+                </div>
+            </header>
+
+            <!-- Load Management List Section -->
+            <section class="load-management-list">
+                <!-- Sample Load 1: In Transit -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Nairobi to Mombasa</h4>
+                        <p class="details">#LD4566 | Dry Van | 40,000 kg</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status in-transit">In Transit</span>
+                        <p class="carrier-info">Carrier: J.B. Hunt</p>
+                    </div>
+                    <div class="load-actions">
+                        <a href="track-load.html" class="btn btn-secondary">Track Load</a>
+                    </div>
+                </div>
+
+                <!-- Sample Load 2: Reviewing Bids -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Kisumu to Nakuru</h4>
+                        <p class="details">#LD4568 | Reefer | 25,000 kg</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status reviewing-bids">Reviewing Bids</span>
+                        <p class="carrier-info">3 new bids</p>
+                    </div>
+                    <div class="load-actions">
+                        <button class="btn btn-primary">View Bids</button>
+                    </div>
+                </div>
+
+                <!-- Sample Load 3: Awaiting Bids -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Eldoret to Nairobi</h4>
+                        <p class="details">#LD4569 | Flatbed | 15,000 kg</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status awaiting-bids">Awaiting Bids</span>
+                        <p class="carrier-info">Posted 1 hour ago</p>
+                    </div>
+                    <div class="load-actions">
+                        <button class="btn btn-secondary">Edit</button>
+                    </div>
+                </div>
+
+                <!-- Sample Load 4: Delivered -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Mombasa to Malaba</h4>
+                        <p class="details">#LD4567 | Dry Van | 38,000 kg</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status delivered">Delivered</span>
+                        <p class="carrier-info">Completed on 2025-11-22</p>
+                    </div>
+                    <div class="load-actions">
+                        <button class="btn btn-secondary">View Details</button>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Auto-collapse for any sidebar navigation ---
+        document.querySelector('.sidebar-nav ul').addEventListener('click', function(event) {
+            if (event.target.closest('a')) {
+                localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+            }
+        });
+    </script>
+
+</body>
+</html>

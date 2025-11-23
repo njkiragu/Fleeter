@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Load - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet.js CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="auto-collapse-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="find-loads.html" class="auto-collapse-link"><i class="fas fa-search"></i> <span>Find Loads</span></a></li>
+                    <li><a href="post-load.html" class="auto-collapse-link"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a></li>
+                    <!-- The user came from this page, so we keep it active -->
+                    <li class="active"><a href="my-posted-loads.html" class="auto-collapse-link"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html" class="auto-collapse-link"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <li><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html" id="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Live Tracking: Load #LD4566</h1>
+                    <p>Nairobi to Mombasa</p>
+                </div>
+            </header>
+
+            <!-- Tracking Details Section -->
+            <section class="tracking-container">
+                <div class="tracking-status-panel">
+                    <div class="status-section">
+                        <h4>Live Status</h4>
+                        <div class="status-item">
+                            <span>Status</span>
+                            <span class="status-value"><span class="status-indicator moving"></span>In Transit</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Current Location</span>
+                            <span class="status-value">Voi, Taita-Taveta County</span>
+                        </div>
+                         <div class="status-item">
+                            <span>Last Updated</span>
+                            <span class="status-value">2 minutes ago</span>
+                        </div>
+                        <div class="status-item">
+                            <span>ETA</span>
+                            <span class="status-value">Approx. 3 hours</span>
+                        </div>
+                    </div>
+                    <div class="status-section">
+                        <h4>Carrier Details</h4>
+                         <div class="status-item">
+                            <span>Carrier</span>
+                            <span class="status-value">J.B. Hunt</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Driver</span>
+                            <span class="status-value">James K.</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Truck Plate</span>
+                            <span class="status-value">KDA 123X</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tracking-map-panel">
+                    <!-- In a real app, this div would be used by a mapping library like Google Maps or Mapbox -->
+                    <div id="map"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Leaflet.js Script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Auto-collapse for specific sidebar links ---
+        document.querySelectorAll('.auto-collapse-link').forEach(link => {
+            link.addEventListener('click', function() {
+                localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+            });
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            localStorage.removeItem('fleeter_rememberUser');
+            localStorage.removeItem('fleeter_userName');
+        });
+
+
+        // The location of the truck (Voi, Kenya)
+        const truckLocation = [-3.393, 38.567];
+
+        // Initialize the map and set its view to the truck's location
+        const map = L.map('map').setView(truckLocation, 12);
+
+        // Add the OpenStreetMap tile layer
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Create a custom icon for the truck
+        const truckIcon = L.icon({
+            iconUrl: 'https://maps.google.com/mapfiles/kml/shapes/truck.png',
+            iconSize: [32, 32], // size of the icon
+            iconAnchor: [16, 16], // point of the icon which will correspond to marker's location
+        });
+
+        // Add a marker to the map at the truck's location
+        L.marker(truckLocation, { icon: truckIcon }).addTo(map)
+            .bindPopup('<b>Load #LD4566</b><br>Status: In Transit')
+            .openPopup();
+    </script>
+
+</body>
+</html>

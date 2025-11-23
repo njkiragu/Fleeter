@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Details - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet.js CSS for OpenStreetMap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <!-- The user came from this page, so we keep it active -->
+                    <li class="active"><a href="find-loads.html"><i class="fas fa-truck"></i> <span>Find Loads</span></a></li>
+                    <li><a href="my-posted-loads.html"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <li><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Load Details: #LD4566</h1>
+                    <p>Review the load information and place your bid.</p>
+                </div>
+            </header>
+
+            <!-- Load Details Section -->
+            <section class="tracking-container">
+                <div class="tracking-status-panel">
+                    <div class="status-section">
+                        <h4><i class="fas fa-route"></i> Route</h4>
+                        <div class="status-item">
+                            <span>Origin</span>
+                            <span class="status-value">Nairobi</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Destination</span>
+                            <span class="status-value">Mombasa</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Distance</span>
+                            <span id="distance" class="status-value">Calculating...</span>
+                        </div>
+                    </div>
+                    <div class="status-section">
+                        <h4><i class="fas fa-box-open"></i> Load Specs</h4>
+                        <div class="status-item">
+                            <span>Equipment</span>
+                            <span class="status-value">Dry Van</span>
+                        </div>
+                        <div class="status-item">
+                            <span>Weight</span>
+                            <span class="status-value">40,000 kg</span>
+                        </div>
+                    </div>
+                     <div class="status-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Rate</h4>
+                        <div class="status-item">
+                            <span>Offered Rate</span>
+                            <span class="status-value price">Ksh 85,000</span>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                         <button class="btn btn-primary btn-large"><i class="fas fa-gavel"></i> Place Bid</button>
+                    </div>
+                </div>
+                <div class="tracking-map-panel">
+                    <div id="map"></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Leaflet.js Script -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Define Coordinates (Nairobi to Mombasa) ---
+            const originCoords = [-1.2921, 36.8219];
+            const destinationCoords = [-4.0435, 39.6682];
+
+            // --- Initialize Map ---
+            const map = L.map('map').setView(originCoords, 7);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // --- Add Markers ---
+            L.marker(originCoords).addTo(map).bindPopup('<b>Origin:</b> Nairobi');
+            L.marker(destinationCoords).addTo(map).bindPopup('<b>Destination:</b> Mombasa');
+
+            // --- Fetch Route and Distance from OSRM ---
+            const url = `https://router.project-osrm.org/route/v1/driving/${originCoords[1]},${originCoords[0]};${destinationCoords[1]},${destinationCoords[0]}?overview=full&geometries=geojson`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.routes && data.routes.length > 0) {
+                        const route = data.routes[0];
+                        const distance = (route.distance / 1000).toFixed(0); // Convert meters to km
+
+                        // Display the distance on the page
+                        document.getElementById('distance').textContent = `${distance} km`;
+
+                        // Draw the route line on the map
+                        L.geoJSON(route.geometry, {
+                            style: {
+                                color: '#0056b3',
+                                weight: 5
+                            }
+                        }).addTo(map);
+
+                        // Fit map to the route bounds
+                        const bounds = L.geoJSON(route.geometry).getBounds();
+                        map.fitBounds(bounds, { padding: [50, 50] });
+                    }
+                });
+        });
+
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Auto-collapse for any sidebar navigation ---
+        document.querySelector('.sidebar-nav ul').addEventListener('click', function(event) {
+            // Check if a link inside the list was clicked
+            if (event.target.closest('a')) {
+                localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+            }
+        });
+    </script>
+
+</body>
+</html>

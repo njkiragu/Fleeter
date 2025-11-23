@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <script>
+        // Auto-login check
+        (function() {
+            if (localStorage.getItem('fleeter_rememberUser') === 'true') {
+                window.location.href = 'dashboard.html';
+            }
+        })();
+    </script>
+    <div class="auth-container">
+        <div class="auth-form-wrapper">
+            <div class="auth-header">
+                <a href="index.html">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form">
+                <h2 class="auth-title">Welcome Back!</h2>
+                <p>Sign in to manage your loads and trucks.</p>
+                <form id="loginForm">
+                    <div id="login-error" class="error-message"></div>
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <div class="form-extra-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember-me" name="remember-me">
+                            <label for="remember-me">Remember Me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-btn"><span>Login</span></button>
+                </form>
+                <p class="toggle-auth">Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="register-form" class="auth-form" style="display: none;">
+                <h2 class="auth-title">Create Your Account</h2>
+                <p>Join the network of Kenya's top carriers and brokers.</p>
+                <form id="registerForm">
+                    <div id="register-error" class="error-message"></div>
+                    <div class="input-group">
+                        <label>I am a...</label>
+                        <div class="role-selection">
+                            <input type="radio" id="role-carrier" name="role" value="carrier" checked>
+                            <label for="role-carrier">Carrier</label>
+                            <input type="radio" id="role-broker" name="role" value="broker">
+                            <label for="role-broker">Broker</label>
+                            <input type="radio" id="role-shipper" name="role" value="shipper">
+                            <label for="role-shipper">Shipper</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" name="fullname" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-company">Company Name</label>
+                        <input type="text" id="reg-company" name="companyname" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="reg-confirm-password">Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" name="confirmpassword" required>
+                    </div>
+                    <div class="input-group terms">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a></label>
+                    </div>
+                    <button type="submit" class="btn btn-primary auth-btn"><span>Create Account</span></button>
+                </form>
+                <p class="toggle-auth">Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Gemini-Style Loading Overlay -->
+    <div id="loading-overlay" style="display: none;">
+        <div class="loading-container">
+            <!-- Thinking Dots -->
+            <div class="thinking-dots">
+                <div class="dot dot-blue"></div>
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+
+            <!-- Pulsing Logo -->
+            <div class="pulse-background">
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="pulse-ring"></div>
+                <div class="center-logo">F</div>
+            </div>
+
+            <!-- Typing Text -->
+            <div class="typing-text" id="typingText">
+                Authenticating...<span class="typing-cursor"></span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Form Toggle Function ---
+        function toggleForms() {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginError = document.getElementById('login-error');
+            const registerError = document.getElementById('register-error');
+
+            // Clear any previous error messages when toggling
+            loginError.textContent = '';
+            registerError.textContent = '';
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+
+        // --- Login Form Logic ---
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const authWrapper = document.querySelector('.auth-form-wrapper');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            const loginError = document.getElementById('login-error');
+            loginError.textContent = ''; // Clear previous errors
+
+            // --- Validation ---
+            if (!email || !password) {
+                loginError.textContent = 'Please enter both email and password.';
+                return;
+            }
+
+            // --- Show New Loading Animation ---
+            authWrapper.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
+
+            // --- Simulate Network Request ---
+            setTimeout(() => {
+                // --- Handle "Remember Me" ---
+                if (rememberMe) {
+                    localStorage.setItem('fleeter_rememberUser', 'true');
+                    // For the welcome message, we'll save the email as the name on login
+                    localStorage.setItem('fleeter_userName', email.split('@')[0]);
+                } else {
+                    // If not checked, ensure any previous "remember" flag is removed
+                    localStorage.removeItem('fleeter_rememberUser');
+                }
+
+                // On success, redirect to the dashboard.
+                // In a real app, this would happen after the server confirms the login.
+                window.location.href = 'dashboard.html';
+            }, 1500); // 1.5-second delay
+        });
+
+        // --- Registration Form Logic ---
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const authWrapper = document.querySelector('.auth-form-wrapper');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const userName = document.getElementById('reg-name').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+            const terms = document.getElementById('terms').checked;
+            const termsGroup = document.querySelector('.input-group.terms');
+            const registerError = document.getElementById('register-error');
+            registerError.textContent = ''; // Clear previous errors
+            termsGroup.classList.remove('input-error'); // Clear previous visual error
+
+            // --- Validation ---
+            if (!userName.trim()) {
+                registerError.textContent = 'Please enter your full name.';
+                return;
+            }
+            if (password !== confirmPassword) {
+                registerError.textContent = 'Passwords do not match.';
+                return;
+            }
+            if (!terms) {
+                registerError.textContent = 'You must agree to the Terms of Service.';
+                termsGroup.classList.add('input-error'); // Add visual error
+                return;
+            }
+
+            // --- Show New Loading Animation ---
+            authWrapper.style.display = 'none';
+            loadingOverlay.style.display = 'flex';
+
+            // --- Simulate Network Request ---
+            setTimeout(() => {
+                // Save the user's name to localStorage
+                localStorage.setItem('fleeter_userName', userName);
+
+                // On success, redirect to the dashboard.
+                window.location.href = 'dashboard.html';
+            }, 1500); // 1.5-second delay
+        });
+    </script>
+
+</body>
+</html>

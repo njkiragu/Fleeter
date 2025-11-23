@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+                <div class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <!-- HOME & OVERVIEW -->
+                <div class="nav-category">
+                    <span class="category-label">Overview</span>
+                    <div class="nav-item">
+                        <a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#"><i class="fas fa-bell"></i> <span>Notifications</span> <span class="badge">12</span></a>
+                    </div>
+                </div>
+
+                <!-- LOADS & SHIPMENTS -->
+                <div class="nav-category">
+                    <span class="category-label">Loads & Shipments</span>
+                    <div class="nav-item">
+                        <a href="find-loads.html"><i class="fas fa-search"></i> <span>Find Loads</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="my-posted-loads.html"><i class="fas fa-truck"></i> <span>My Shipments</span> <span class="badge">8</span></a>
+                    </div>
+                     <div class="nav-item">
+                        <a href="my-bids.html"><i class="fas fa-gavel"></i> <span>My Bids</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="post-load.html"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a>
+                    </div>
+                </div>
+
+                <!-- OPERATIONS & TRACKING -->
+                <div class="nav-category">
+                    <span class="category-label">Operations</span>
+                    <div class="nav-item">
+                        <a href="track-load.html"><i class="fas fa-map-marked-alt"></i> <span>Map View</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#"><i class="fas fa-route"></i> <span>Route Planner</span></a>
+                    </div>
+                </div>
+
+                <!-- FINANCIAL -->
+                <div class="nav-category">
+                    <span class="category-label">Financial</span>
+                    <div class="nav-item">
+                        <a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#"><i class="fas fa-chart-line"></i> <span>Revenue Reports</span></a>
+                    </div>
+                </div>
+
+                <!-- SETTINGS & ADMIN -->
+                <div class="nav-category">
+                    <span class="category-label">Account</span>
+                    <div class="nav-item">
+                        <a href="#"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#"><i class="fas fa-envelope"></i> <span>Messages</span></a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="index.html" id="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Welcome Back, John!</h1>
+                    <p>Here is a summary of your activity.</p>
+                </div>
+                <div class="header-actions">
+                    <a href="post-load.html" class="btn btn-primary">Post a New Load</a>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <a href="my-posted-loads.html" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                        <div class="stat-info">
+                            <h4>Active Hauls</h4>
+                            <p>3</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="my-bids.html" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-gavel"></i></div>
+                        <div class="stat-info">
+                            <h4>Pending Bids</h4>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h4>Completed This Month</h4>
+                        <p>12</p>
+                    </div>
+                </div>
+                <a href="payments.html" class="stat-card-link">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                        <div class="stat-info">
+                            <h4>Earnings</h4>
+                            <p>Ksh 450,000</p>
+                        </div>
+                    </div>
+                </a>
+            </section>
+
+            <section class="recent-activity">
+                <h2>Recent Activity</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Load ID</th>
+                            <th>Route</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added dynamically later -->
+                        <tr>
+                            <td>#LD4567</td>
+                            <td>Nairobi to Mombasa</td>
+                            <td><span class="status delivered">Delivered</span></td>
+                            <td>2025-11-22</td>
+                        </tr>
+                        <tr>
+                            <td>#LD4566</td>
+                            <td>Kisumu to Nairobi</td>
+                            <td><span class="status in-transit">In Transit</span></td>
+                            <td>2025-11-21</td>
+                        </tr>
+                         <tr>
+                            <td>#LD4565</td>
+                            <td>Mombasa to Nakuru</td>
+                            <td><span class="status pending">Bid Accepted</span></td>
+                            <td>2025-11-20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('fleeter_userName');
+            if (userName) {
+                // Find the h1 tag and update its content
+                const welcomeMessage = document.querySelector('.main-header .header-title h1');
+                const firstName = userName.split(' ')[0];
+                welcomeMessage.textContent = `Welcome Back, ${firstName}!`;
+
+            }
+        });
+
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            localStorage.removeItem('fleeter_rememberUser');
+            localStorage.removeItem('fleeter_userName');
+            // No need to preventDefault, the link will navigate to index.html
+        });
+
+        // --- Smooth Page Transition Logic ---
+        function smoothNavigate(event) {
+            // Only run for left-clicks and not for ctrl/cmd-clicks (new tab)
+            if (event.button !== 0 || event.ctrlKey || event.metaKey) {
+                return;
+            }
+            event.preventDefault();
+            const destination = this.href;
+            const overlay = document.getElementById('page-load-overlay');
+            if (overlay) {
+                overlay.style.display = 'flex';
+            }
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 700); // 0.7 second delay for the animation
+        }
+
+        document.querySelectorAll('.sidebar-nav a, .stat-card-link, .load-actions a').forEach(link => {
+            if (link.id !== 'logout-link' && link.href && link.target !== '_blank') {
+                link.addEventListener('click', smoothNavigate);
+            }
+        });
+    </script>
+
+</body>
+</html>

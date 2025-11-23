@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fleeter - Your B2B Load Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <script>
+        // Auto-login check
+        (function() {
+            if (localStorage.getItem('fleeter_rememberUser') === 'true') {
+                window.location.href = 'dashboard.html';
+            }
+        })();
+    </script>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">For Carriers</a></li>
+                <li><a href="#">For Brokers</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login-register.html" class="btn btn-login">Login</a>
+                <a href="login-register.html" class="btn btn-signup">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>The Smartest Way to Move Freight in Kenya</h1>
+                <p>Connecting Loaders, Brokers, and Carriers on one simple, powerful platform.</p>
+                <div class="hero-buttons">
+                    <a href="login-register.html" class="btn btn-primary">Find Loads</a>
+                    <a href="login-register.html" class="btn btn-secondary">Post a Truck</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <h2>Get Started in 3 Easy Steps</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register</h3>
+                    <p>Create your free account as a carrier, broker, or loader.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Post or Find</h3>
+                    <p>Post your available trucks or search thousands of loads instantly.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Connect & Move</h3>
+                    <p>Connect directly, agree on rates, and get your freight moving.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>A Platform Built for You</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Real-Time Load Board</h3>
+                    <p>Access live updates on available loads and trucks across Kenya.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Verified Users</h3>
+                    <p>Work with trusted and vetted partners to ensure security and reliability.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Transparent Rates</h3>
+                    <p>Get insights into market rates to negotiate with confidence.</p>
+                </div>
+                 <div class="feature-item">
+                    <h3>Mobile Friendly</h3>
+                    <p>Manage your business on the go from any device, anytime.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Fleeter. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

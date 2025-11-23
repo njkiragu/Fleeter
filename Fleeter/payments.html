@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments - Fleeter</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Simple icon library for demo purposes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">F</div>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="dashboard.html" class="auto-collapse-link"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+                    <li><a href="find-loads.html" class="auto-collapse-link"><i class="fas fa-search"></i> <span>Find Loads</span></a></li>
+                    <li><a href="post-load.html" class="auto-collapse-link"><i class="fas fa-plus-circle"></i> <span>Post a Load</span></a></li>
+                    <li><a href="my-posted-loads.html" class="auto-collapse-link"><i class="fas fa-truck-loading"></i> <span>My Posted Loads</span></a></li>
+                    <li><a href="my-bids.html" class="auto-collapse-link"><i class="fas fa-gavel"></i> <span>My Bids</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-envelope"></i> <span>Messages</span></a></li>
+                    <!-- This is the active page -->
+                    <li class="active"><a href="payments.html"><i class="fas fa-file-invoice-dollar"></i> <span>Payments</span></a></li>
+                    <li><a href="#" class="auto-collapse-link"><i class="fas fa-user-circle"></i> <span>Profile</span></a></li>
+                    <li><a href="index.html" id="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-title">
+                    <h1>Payment History</h1>
+                    <p>View your transaction history and earnings.</p>
+                </div>
+            </header>
+
+            <!-- Payment History List Section -->
+            <section class="load-management-list">
+                <!-- Sample Payment 1: Paid -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Nairobi to Mombasa</h4>
+                        <p class="details">#LD4567 | Completed: 2025-11-22</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status delivered">Paid</span>
+                        <p class="carrier-info">Amount: Ksh 85,000</p>
+                    </div>
+                    <div class="load-actions">
+                        <a href="#" class="btn btn-secondary">View Invoice</a>
+                    </div>
+                </div>
+
+                <!-- Sample Payment 2: Processing -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Mombasa to Nakuru</h4>
+                        <p class="details">#LD4565 | Completed: 2025-11-20</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status processing">Processing</span>
+                        <p class="carrier-info">Amount: Ksh 78,000</p>
+                    </div>
+                    <div class="load-actions">
+                        <a href="#" class="btn btn-secondary">View Details</a>
+                    </div>
+                </div>
+
+                 <!-- Sample Payment 3: Paid -->
+                <div class="posted-load-item">
+                    <div class="load-info">
+                        <h4 class="route">Nakuru to Kisumu</h4>
+                        <p class="details">#LD4564 | Completed: 2025-11-18</p>
+                    </div>
+                    <div class="load-status">
+                        <span class="status delivered">Paid</span>
+                        <p class="carrier-info">Amount: Ksh 60,000</p>
+                    </div>
+                    <div class="load-actions">
+                        <a href="#" class="btn btn-secondary">View Invoice</a>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // --- Sidebar Collapse Logic ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('sidebarToggle');
+            const toggleIcon = toggleButton.querySelector('i');
+
+            // Function to apply the collapsed state
+            const applyCollapsedState = () => {
+                sidebar.classList.add('collapsed');
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            };
+
+            // Check localStorage for saved state
+            if (localStorage.getItem('fleeter_sidebar_collapsed') === 'true') {
+                applyCollapsedState();
+            }
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const isCollapsed = sidebar.classList.contains('collapsed');
+                if (isCollapsed) {
+                    toggleIcon.classList.remove('fa-chevron-left');
+                    toggleIcon.classList.add('fa-chevron-right');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+                } else {
+                    toggleIcon.classList.remove('fa-chevron-right');
+                    toggleIcon.classList.add('fa-chevron-left');
+                    localStorage.setItem('fleeter_sidebar_collapsed', 'false');
+                }
+            });
+        });
+
+        // --- Auto-collapse for specific sidebar links ---
+        document.querySelectorAll('.auto-collapse-link').forEach(link => {
+            link.addEventListener('click', function() {
+                localStorage.setItem('fleeter_sidebar_collapsed', 'true');
+            });
+        });
+
+        // --- Logout Logic ---
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            localStorage.removeItem('fleeter_rememberUser');
+            localStorage.removeItem('fleeter_userName');
+        });
+    </script>
+
+</body>
+</html>

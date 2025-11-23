@@ -1,0 +1,848 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Header and Navigation */
+header {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #0056b3;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login {
+    background: transparent;
+    color: #0056b3;
+}
+
+.btn-signup {
+    background: #28a745;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to bottom, rgb(59, 72, 84), rgb(25, 33, 41)), url(https://hlp.test.nprod.dat.com/login/assets/map.png);
+    background-blend-mode: multiply;
+    background-position: center center;
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 1rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons .btn {
+    margin: 0 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* How It Works & Features Sections */
+.how-it-works, .features {
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.how-it-works h2, .features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.steps-container, .features-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.step, .feature-item {
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    flex-basis: 30%;
+    min-width: 280px;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: #0056b3;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 5%;
+}
+
+/* Authentication Page Styles */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 86, 179, 0.85), rgba(25, 33, 41, 0.95)), url(https://hlp.test.nprod.dat.com/login/assets/map.png);
+    background-blend-mode: multiply;
+    background-position: center center;
+    background-size: cover;
+}
+
+.auth-form-wrapper {
+    background: #fff;
+    padding: 3rem;
+    padding-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-header a {
+    display: inline-flex; /* To align icon and text */
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.auth-header .logo-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.8rem;
+}
+
+.auth-form .auth-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.auth-form p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 0.7rem 0.2rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0; /* Remove rounded corners for a flatter look */
+    box-sizing: border-box; /* Important for padding */
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input[type="text"]:focus,
+.input-group input[type="email"]:focus,
+.input-group input[type="password"]:focus {
+    outline: none;
+    border-bottom: 2px solid #0056b3;
+}
+
+.form-extra-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #555;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin-bottom: 0; /* Reset margin as it's now in a flex container */
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.toggle-auth {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.toggle-auth a {
+    color: #0056b3;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.role-selection {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+}
+
+.input-group.terms {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    background-color: #f4f7f6;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+    transition: margin-left 0.3s ease;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.main-header p {
+    margin: 0;
+    color: #666;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: #0056b3;
+}
+
+.stat-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.stat-info p {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Recent Activity Table */
+.recent-activity {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.recent-activity h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+table th {
+    font-weight: bold;
+    color: #555;
+}
+
+.status {
+    padding: 0.3rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.status.delivered {
+    background: #28a745; /* Green */
+}
+
+.status.in-transit {
+    background: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.status.pending {
+    background: #17a2b8; /* Teal */
+}
+
+/* Find Loads Page - Search Filters */
+.search-filters {
+    background: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.filter-group .filter-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.filter-input, .filter-select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.filter-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Find Loads Page - Load Listings */
+.load-listings {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    overflow: hidden; /* To keep border-radius */
+}
+
+.results-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.results-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.load-item {
+    display: grid;
+    grid-template-columns: 2.5fr 1.5fr 1fr 1.5fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.load-item:last-child {
+    border-bottom: none;
+}
+
+.load-item:hover {
+    background-color: #f8f9fa;
+}
+
+.load-item.hot-load {
+    border-left: 4px solid #dc3545; /* Red border for urgent loads */
+}
+
+.load-route {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.location .city {
+    font-weight: bold;
+    color: #333;
+}
+.location .province {
+    font-size: 0.85rem;
+    color: #666;
+}
+.route-arrow {
+    color: #0056b3;
+    font-size: 1.5rem;
+}
+
+.load-details, .load-rate, .load-broker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.load-type {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.load-specs, .rate-per-km, .post-time {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.load-rate .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.load-broker .company-name {
+    font-weight: bold;
+}
+
+.post-time .fa-fire {
+    color: #dc3545;
+}
+
+.load-actions {
+    text-align: right;
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #dc3545; /* Red */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.75rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    text-align: center;
+    /* Hide by default */
+    display: none; 
+}
+
+/* A bit of JS will make it display: block when there's text */
+.error-message:not(:empty) {
+    display: block;
+}
+
+/* Main Overlay Container */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 86, 179, 0.85), rgba(25, 33, 41, 0.95)), url(https://hlp.test.nprod.dat.com/login/assets/map.png);
+    background-blend-mode: multiply;
+    background-position: center center;
+    background-size: cover;
+    z-index: 200;
+}
+
+.loading-container {
+    text-align: center;
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Thinking Dots */
+.thinking-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: thinking 1.4s ease-in-out infinite both;
+}
+
+.dot-blue { background: var(--gemini-blue); animation-delay: -0.32s; }
+.dot-red { background: var(--gemini-red); animation-delay: -0.16s; }
+.dot-yellow { background: var(--gemini-yellow); animation-delay: 0s; }
+.dot-green { background: var(--gemini-green); animation-delay: 0.16s; }
+
+@keyframes thinking {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Pulsing Background Effect */
+.pulse-background {
+    position: relative;
+    margin: 2rem auto;
+    width: 80px;
+    height: 80px;
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 3px solid var(--gemini-blue);
+    border-radius: 50%;
+    animation: pulse 2s ease-out infinite;
+    opacity: 0;
+}
+
+.pulse-ring:nth-child(2) { animation-delay: 0.5s; }
+.pulse-ring:nth-child(3) { animation-delay: 1s; }
+
+.center-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #0056b3;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+/* Typing Text Animation */
+.typing-text {
+    font-size: 1.2rem;
+    color: #003d82;
+    margin-bottom: 1rem;
+    height: 30px;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2rem;
+    background: var(--gemini-blue);
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: #f8f9fa;
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gemini-blue), var(--gemini-green));
+    border-radius: 2px;
+    width: 0%;
+    animation: progress 1.5s ease-in-out forwards;
+}
+
+@keyframes progress {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* Style for highlighting validation errors on inputs */
+.input-group.input-error label {
+    color: #dc3545; /* Red */
+}
+
+.input-group.input-error {
+    animation: shake 0.4s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* --- Collapsible Sidebar Styles --- */
+.sidebar-toggle {
+    cursor: pointer;
+    padding: 1rem;
+    text-align: center;
+    background: #34495e;
+    border-top: 1px solid #4a627a;
+    margin-top: auto;
+}
+
+.nav-category {
+    margin-top: 1.5rem;
+}
+
+.category-label {
+    padding: 0 1.5rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.sidebar-nav li {
+    margin: 0.5rem 0; /* Add vertical margin to space out items */
+}
+
+.nav-item {
+    position: relative;
+}
+
+.badge {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 10px;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.7rem;
+    margin-left: auto;
+}
+
+.sidebar-toggle:hover {
+    background: #4a627a;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .sidebar-header .logo-icon {
+    margin: 0 auto; /* Center the icon */
+}
+
+.sidebar.collapsed .sidebar-toggle {
+    right: -14px; /* Keep it hanging off the edge */
+    background-color: #fff;
+}
+
+.sidebar.collapsed .sidebar-nav span {
+    /* Tooltip styles */
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #34495e;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin-left: 15px; /* Space from the icon */
+    white-space: nowrap; /* Prevent text from wrapping */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none; /* Prevent the hidden tooltip from blocking mouse events */
+    z-index: 1000;
+}
+
+.sidebar.collapsed .sidebar-nav a {
+    justify-content: center;
+}
+
+.sidebar-nav a i {
+    font-size: 1.2rem; /* Increase icon size */
+}
+
+.sidebar.collapsed .sidebar-nav a:hover span {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Adjust main content when sidebar is collapsed */
+@media (min-width: 769px) {
+    .sidebar.collapsed + .main-content {
+        margin-left: 80px;
+    }
+    .dashboard-container {
+        position: relative;
+    }
+    .main-content {
+        margin-left: 250px;
+    }
+}
